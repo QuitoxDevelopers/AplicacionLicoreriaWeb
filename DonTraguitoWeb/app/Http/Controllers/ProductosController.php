@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Productos;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 class ProductosController extends Controller
@@ -86,14 +87,14 @@ class ProductosController extends Controller
         //
         $datosProducto=request()->except(['_token','_method']);
         if($request->hasFile('Imagen')){
-            $producto= productos::findOrFail($Id);
-            Storage::delete('public/storage'.$producto->Imagen);
-            $datosProductos['Imagen']=$request->file('Imagen')->store('uploads','public');
+            $producto= Productos::findOrFail($Id);
+            Storage::delete('public/'.$producto->Imagen);
+            $datosProducto['Imagen']=$request->file('Imagen')->store('uploads','public');
         }
 
         Productos::where('Id','=',$Id)->update($datosProducto);
 
-        $producto= productos::findOrFail($Id);
+        $producto= Productos::findOrFail($Id);
         //return view('productos.edit',compact('producto'));
         return redirect()->action('ProductosController@index');
     }
@@ -104,10 +105,15 @@ class ProductosController extends Controller
      * @param  \App\Productos  $productos
      * @return \Illuminate\Http\Response
      */
-    public function destroy($Id)
+    public function destroy($id)
     {
         //
-        Productos::destroy($Id);
+        $producto=Productos::findOrFail($id);
+        if(Storage::delete('public/'.$producto->Imagen))
+        {
+            DB::table("productos")->delete($id);
+        }
+
         return redirect('productos');
     }
 }

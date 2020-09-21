@@ -11,12 +11,13 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+//Route::get('/', function () {
+//    return view('productos.index');
+//});
 
-//Route::get('/usuarios','UsuariosController@index');
+Route::get('/','ProductosController@index');
 //Route::get('/usuarios/create','UsuariosController@create');
 Route::resource('usuarios', 'UsuariosController');
 Route::resource('productos', 'ProductosController');
 Route::resource('pedidos', 'PedidosController');
+Route::resource('detalles', 'DetallesController');

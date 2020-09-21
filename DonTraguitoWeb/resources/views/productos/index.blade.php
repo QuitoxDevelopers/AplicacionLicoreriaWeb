@@ -24,13 +24,13 @@ productoS
             </td>
             <td>
 
-            <a href="{{ url('/productos/'.$producto->Id.'/edit')}}">Editar</a>
+                <a href="{{ url('/productos/'.$producto->Id.'/edit')}}">Editar</a>
 
-            <form method="post" action="{{url('/productos/'.$producto->Id)}}">
-            {{csrf_field()}}
-            {{method_field('DELETE')}}
-            <button type="submit" onclick="return confirm('¿Está seguro que desea eliminar?')">Eliminar</button>
-            </form>
+                <form method="post" action="{{url('/productos/'.$producto->Id)}}" enctype="multipart/form-data">
+                    {{csrf_field()}}
+                    {{method_field('DELETE')}}
+                <button type="submit" onclick="return confirm('¿Está seguro que desea eliminar?')">Eliminar {{$producto->Id}}</button>
+                </form>
 
             </td>
         </tr>

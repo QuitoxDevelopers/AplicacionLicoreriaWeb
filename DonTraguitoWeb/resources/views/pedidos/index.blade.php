@@ -5,8 +5,8 @@ PEDIDOS
             <th>#<th>
             <th>Usuario Asociado<th>
             <th>Fecha Emisión<th>
-            <th>Fecha Entrega<th>  
-            <th>Acciones<th> 
+            <th>Fecha Entrega<th>
+            <th>Acciones<th>
         </tr>
     </thead>
     <tbody>
@@ -18,15 +18,15 @@ PEDIDOS
             <td>{{$pedido->FechaEntrega}}</td>
             <td>
             <a href="{{ url('/pedidos/'.$pedido->id.'/edit')}}">Editar</a>
-            
+
             <form method="post" action="{{url('/pedidos/'.$pedido->id)}}">
-            {{csrf_field()}}
-            {{method_field('DELETE')}}
+                @csrf
+                @method('DELETE')
             <button type="submit" onclick="return confirm('¿Está seguro que desea eliminar?')">Eliminar</button>
             </form>
-            
+
             </td>
         </tr>
     @endforeach
-    </tbody> 
+    </tbody>
 </table>
