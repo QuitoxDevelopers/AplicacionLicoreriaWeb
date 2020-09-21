@@ -23,6 +23,7 @@ class CreateUsuariosTable extends Migration
             $table->string('Correo',30);
             $table->string('Contraseña',30);
             $table->boolean('Tipo')->default(0);
+            $table->timestamps(0);
         });
 
     }

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AñadirTimeAUsuarios extends Migration
+class CreateProductosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,13 @@ class AñadirTimeAUsuarios extends Migration
      */
     public function up()
     {
-        //
-        Schema::table('usuarios', function(Blueprint $table){
+        Schema::create('productos', function (Blueprint $table) {
+            $table->bigIncrements('Id');
+            $table->string('Tipo',15);
+            $table->string('Marca',15);
+            $table->string('Presentacion',15);
+            $table->decimal('Precio',5,2);
+            $table->string('Imagen',60);
             $table->timestamps();
         });
     }
@@ -26,7 +31,6 @@ class AñadirTimeAUsuarios extends Migration
      */
     public function down()
     {
-        //
-        
+        Schema::dropIfExists('productos');
     }
 }
