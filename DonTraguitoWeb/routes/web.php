@@ -19,3 +19,4 @@ Route::get('/', function () {
 //Route::get('/usuarios/create','UsuariosController@create');
 Route::resource('usuarios', 'UsuariosController');
 Route::resource('productos', 'ProductosController');
+Route::resource('pedidos', 'PedidosController');
