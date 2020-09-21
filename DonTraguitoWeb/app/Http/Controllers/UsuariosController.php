@@ -15,7 +15,7 @@ class UsuariosController extends Controller
     public function index()
     {
         //
-        $datos['usuarios']=Usuarios::paginate(10);
+        $datos['usuarios']=Usuarios::paginate(30);
         return view('usuarios.index',$datos);
     }
 
@@ -42,7 +42,7 @@ class UsuariosController extends Controller
         //$datosUsuario=request()->all();
         $datosUsuario=request()->except('_token');
         Usuarios::insert($datosUsuario);
-        
+
         return redirect()->action('UsuariosController@index');
     }
 

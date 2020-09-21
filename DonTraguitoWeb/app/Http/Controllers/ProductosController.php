@@ -16,7 +16,7 @@ class ProductosController extends Controller
      */
     public function index()
     {
-        $datos['productos']=Productos::paginate(10);
+        $datos['productos']=Productos::paginate(30);
         return view('productos.index', $datos);
         //
     }
@@ -113,6 +113,7 @@ class ProductosController extends Controller
         {
             DB::table("productos")->delete($id);
         }
+
 
         return redirect('productos');
     }

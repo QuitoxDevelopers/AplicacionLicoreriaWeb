@@ -16,7 +16,7 @@ class DetallesController extends Controller
     public function index()
     {
         //
-        $datos['detalles']=Detalles::paginate(10);
+        $datos['detalles']=Detalles::paginate(30);
         return view('detalles.index',$datos);
     }
 

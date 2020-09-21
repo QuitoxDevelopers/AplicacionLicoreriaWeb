@@ -16,7 +16,7 @@ class PedidosController extends Controller
     public function index()
     {
         //
-        $datos['pedidos']=Pedidos::paginate(10);
+        $datos['pedidos']=Pedidos::paginate(30);
         return view('pedidos.index',$datos);
     }
 
