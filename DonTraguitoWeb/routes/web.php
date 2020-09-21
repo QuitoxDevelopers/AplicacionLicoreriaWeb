@@ -15,7 +15,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+<<<<<<< Updated upstream:DonTraguitoWeb/routes/web.php
 //Route::get('/usuarios','UsuariosController@index');
 //Route::get('/usuarios/create','UsuariosController@create');
 Route::resource('usuarios', 'UsuariosController');
 Route::resource('productos', 'ProductosController');
+=======
+Route::resource('usuarios', 'UsuariosController');
+Route::resource('pedidos', 'PedidosController');
+>>>>>>> Stashed changes:LicoreriaWeb/routes/web.php
