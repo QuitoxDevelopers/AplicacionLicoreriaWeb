@@ -1,4 +1,4 @@
-productoS
+Listado de productos
 <table class="table table-light">
     <thead class="thead-light">
         <tr>

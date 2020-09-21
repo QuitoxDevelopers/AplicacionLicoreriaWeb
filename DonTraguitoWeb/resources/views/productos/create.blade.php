@@ -1,4 +1,4 @@
-FORMULARIO productoS
+Formulario productos
 
 <form action="{{url('/productos')}}" method="post" enctype="multipart/form-data">
 {{csrf_field()}}
