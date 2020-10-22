@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Clientes;
 use App\Pedidos;
-use App\Usuarios;
 use Illuminate\Http\Request;
 
 class PedidosController extends Controller
@@ -16,8 +16,9 @@ class PedidosController extends Controller
     public function index()
     {
         //
-        $datos['pedidos']=Pedidos::paginate(30);
-        return view('pedidos.index',$datos);
+        $datos['pedidos']=Pedidos::all();
+        $datosClientes['clientes']=Clientes::all();
+        return view('pedidos.index',$datos,$datosClientes);
     }
 
     /**
@@ -27,8 +28,8 @@ class PedidosController extends Controller
      */
     public function create()
     {
-        //
-        return view('pedidos.create');
+        $datosClientes['clientes']=Clientes::all();
+        return view('pedidos.create',$datosClientes);
     }
 
     /**
@@ -39,18 +40,15 @@ class PedidosController extends Controller
      */
     public function store(Request $request)
     {
-        //
-        //$datosPedidos=request()->all();
         $datosPedidos=request()->except('_token');
         Pedidos::insert($datosPedidos);
-
-        return redirect()->action('PedidosController@index');
+        return redirect('pedidos');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Pedidos  $pedidos
+     * @param  \App\Models\Pedidos  $pedidos
      * @return \Illuminate\Http\Response
      */
     public function show(Pedidos $pedidos)
@@ -61,43 +59,40 @@ class PedidosController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Pedidos  $pedidos
+     * @param  \App\Models\Pedidos  $pedidos
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($Id_Pedido)
     {
-        //
-        $pedido= Pedidos::findOrFail($id);
-        return view('pedidos.edit',compact('pedido'));
+        $pedidos= Pedidos::findOrFail($Id_Pedido);
+        return view('pedidos.edit',compact('pedidos'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Pedidos  $pedidos
+     * @param  \App\Models\Pedidos  $pedidos
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $Id_Pedido)
     {
-        //
         $datosPedidos=request()->except(['_token','_method']);
-        Pedidos::where('id','=',$id)->update($datosPedidos);
-
-        $pedidos= Pedidos::findOrFail($id);
-        return redirect()->action('PedidosController@index');
+        Pedidos::where('Id_Pedidos', '=', $Id_Pedido)->update($datosPedidos);
+        return redirect('Pedidos');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Pedidos  $pedidos
+     * @param  \App\Models\Pedidos  $pedidos
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($Id_Pedido)
     {
-        //
-        Pedidos::destroy($id);
+        $pedidos=Pedidos::findOrFail($Id_Pedido);
+        $pedidos->delete();
         return redirect('pedidos');
+        //
     }
 }

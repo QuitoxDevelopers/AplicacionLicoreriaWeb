@@ -1,30 +1,34 @@
 Editar productos
 
-<form action="{{url('/productos/'.$producto->Id)}}" method="post" enctype="multipart/form-data">
+<form action="{{url('/productos/'.$producto->Id_Producto)}}" method="post" enctype="multipart/form-data">
     {{csrf_field()}}
     {{method_field('PATCH')}}
     <br>
-    <label for="Tipo">{{'Tipo'}}</label>
-    <input type="text" name="Tipo" id="Tipo" value="{{$producto->Tipo}}">
+    <label for="Tipo_Producto">{{'Tipo'}}</label>
+    <input type="text" name="Tipo_Producto" id="Tipo_Producto" value="">
     <br><br>
 
-    <label for="Marca">{{'Marca'}}</label>
-    <input type="text" name="Marca" id="Marca" value="{{$producto->Marca}}">
+    <label for="Marca_Producto">{{'Marca'}}</label>
+    <input type="text" name="Marca_Producto" id="Marca_Producto" value="">
     <br><br>
 
-    <label for="Presentacion">{{'Presentacion'}}</label>
-    <input type="text" name="Presentacion" id="Presentacion" value="{{$producto->Presentacion}}">
+    <label for="Presentacion_Producto">{{'Presentacion'}}</label>
+    <input type="text" name="Presentacion_Producto" id="Presentacion_Producto" value="">
     <br><br>
 
-    <label for="Precio">{{'Precio'}}</label>
-    <input type="text" name="Precio" id="Precio" value="{{$producto->Precio}}">
+    <label for="Precio_Producto">{{'Precio'}}</label>
+    <input type="text" name="Precio_Producto" id="Precio_Producto" value="">
     <br><br>
 
-    <label for="Imagen">{{'Imagen'}}</label>
+    <label for="Stock_Producto">{{'Stock'}}</label>
+    <input type="text" name="Stock_Producto" id="Stock_Producto" value="">
     <br><br>
-    <img src="{{ asset('storage').'/'. $producto->Imagen}}" alt="" width="200">
+
+    <label for="Imagen_Producto">{{'Imagen'}}</label>
     <br><br>
-    <input type="file" name="Imagen" id="Imagen" value="">
+    <img src="{{ asset('storage').'/'. $producto->Imagen_Producto}}" alt="" width="200">
+    <br><br>
+    <input type="file" name="Imagen_Producto" id="Imagen_Producto" value="">
     <br><br>
 
 

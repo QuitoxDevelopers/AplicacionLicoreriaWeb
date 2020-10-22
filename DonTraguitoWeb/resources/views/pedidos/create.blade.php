@@ -1,20 +1,32 @@
 FORMULARIO PEDIDOS
 
-<form action="{{url('\pedidos')}}" method="post" enctype="multipart/form-data">
+<form action="{{url('/pedidos')}}" method="post" enctype="multipart/form-data">
 {{csrf_field()}}
 <br>
 
-<label for="Usuario_id">{{'Usuario Asociado'}}</label>
-<input type="text"  name="Usuario_id" id="Usuario_id" value="">
+    <label for="CedulaRuc">{{'Cliente'}}</label>
+    <select name="CedulaRuc" id="CedulaRuc">
+        @foreach($clientes as $cliente)
+            <option>{{$cliente->CedulaRuc}}</option>
+        @endforeach
+    </select>
+    <br><br>
+
+<label for="FechaEmision_Pedido">{{'Fecha de Emisión'}}</label>
+<input type="date"  name="FechaEmision_Pedido" id="FechaEmision_Pedido" value="">
 <br><br>
 
-<label for="FechaEmision">{{'Fecha de Emisión'}}</label>
-<input type="date"  name="FechaEmision" id="FechaEmision" value="">
+<label for="FechaEntrega_Pedido">{{'Fecha de Entrega'}}</label>
+<input type="date" name="FechaEntrega_Pedido" id="FechaEntrega_Pedido" value="">
 <br><br>
 
-<label for="FechaEntrega">{{'Fecha de Entrega'}}</label>
-<input type="date" name="FechaEntrega" id="FechaEntrega" value="">
-<br><br>
+    <label for="PrecioTotal_Pedido">{{'Precio Total'}}</label>
+    <input type="text" name="PrecioTotal_Pedido" id="PrecioTotal_Pedido" value="">
+    <br><br>
+
+    <label for="Descuento_Pedido">{{'Descuento'}}</label>
+    <input type="text" name="Descuento_Pedido" id="Descuento_Pedido" value="">
+    <br><br>
 
 <input type="submit" value="Agregar">
 </form>
