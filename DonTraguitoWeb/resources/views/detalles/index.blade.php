@@ -3,8 +3,8 @@ Detalles
     <thead class="thead-light">
     <tr>
         <th># Pedido<th>
+        <th>Producto<th>
         <th>Cantidad<th>
-        <th>dsaas<th>
         <th>Acciones<th>
     </tr>
     </thead>

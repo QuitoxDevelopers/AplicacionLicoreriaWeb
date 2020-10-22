@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Pedidos;
-use App\Usuarios;
+use App\detalles;
+use App\pedidos;
 use Illuminate\Http\Request;
 
-class PedidosController extends Controller
+class DetallesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +16,8 @@ class PedidosController extends Controller
     public function index()
     {
         //
-        $datos['pedidos']=Pedidos::paginate(30);
-        return view('pedidos.index',$datos);
+        $datos['detalles']=Detalles::paginate(30);
+        return view('detalles.index',$datos);
     }
 
     /**
@@ -28,7 +28,7 @@ class PedidosController extends Controller
     public function create()
     {
         //
-        return view('pedidos.create');
+        return view('detalles.create');
     }
 
     /**
@@ -40,20 +40,19 @@ class PedidosController extends Controller
     public function store(Request $request)
     {
         //
-        //$datosPedidos=request()->all();
-        $datosPedidos=request()->except('_token');
-        Pedidos::insert($datosPedidos);
+        $datosDetalles=request()->except('_token');
+        Detalles::insert($datosDetalles);
 
-        return redirect()->action('PedidosController@index');
+        return redirect()->action('DetallesController@index');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Pedidos  $pedidos
+     * @param  \App\detalles  $detalles
      * @return \Illuminate\Http\Response
      */
-    public function show(Pedidos $pedidos)
+    public function show(detalles $detalles)
     {
         //
     }
@@ -61,43 +60,43 @@ class PedidosController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Pedidos  $pedidos
+     * @param  \App\detalles  $detalles
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($pedido_id)
     {
         //
-        $pedido= Pedidos::findOrFail($id);
-        return view('pedidos.edit',compact('pedido'));
+        $detalles= Detalles::findOrFail($pedido_id);
+        return view('detalles.edit',compact('detalles'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Pedidos  $pedidos
+     * @param  \App\detalles  $detalles
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $pedido_id)
     {
         //
-        $datosPedidos=request()->except(['_token','_method']);
-        Pedidos::where('id','=',$id)->update($datosPedidos);
+        $datosDetalles=request()->except(['_token','_method']);
+        Detalles::where('pedido_id','=',$pedido_id)->update($datosDetalles);
 
-        $pedidos= Pedidos::findOrFail($id);
-        return redirect()->action('PedidosController@index');
+        $detalles= Detalles::findOrFail($pedido_id);
+        return redirect()->action('DetallesController@index');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Pedidos  $pedidos
+     * @param  \App\detalles  $detalles
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($pedido_id)
     {
         //
-        Pedidos::destroy($id);
+        Detalles::table('detalles')->delete($pedido_id);
         return redirect('pedidos');
     }
 }

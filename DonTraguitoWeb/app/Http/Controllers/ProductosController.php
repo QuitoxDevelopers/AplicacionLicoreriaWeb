@@ -16,8 +16,8 @@ class ProductosController extends Controller
      */
     public function index()
     {
-        $datos['productos']=Productos::all();
-        return view('productos.index',$datos);
+        $datos['productos']=Productos::paginate(30);
+        return view('productos.index', $datos);
         //
     }
 
@@ -42,76 +42,78 @@ class ProductosController extends Controller
     {
         //
         $datosProductos=request()->except('_token');
-        if($request->hasFile('Imagen_Producto')){
-            $datosProductos['Imagen_Producto']=$request->file('Imagen_Producto')->store('uploads','public');
+        if($request->hasFile('Imagen')){
+            $datosProductos['Imagen']=$request->file('Imagen')->store('uploads','public');
         }
 
         Productos::insert($datosProductos);
 
-        return redirect('productos');
-        //
+        return redirect()->action('ProductosController@index');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Productos  $productos
+     * @param  \App\Productos  $productos
      * @return \Illuminate\Http\Response
      */
     public function show(Productos $productos)
     {
-        //
+
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Productos  $productos
+     * @param  \App\Productos  $productos
      * @return \Illuminate\Http\Response
      */
-    public function edit($Id_Producto)
+    public function edit($Id)
     {
-        $producto= Productos::findOrFail($Id_Producto);
-        return view('productos.edit',compact('producto'));
         //
+        $producto= Productos::findOrFail($Id);
+        return view('productos.edit',compact('producto'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Productos  $productos
+     * @param  \App\Productos  $productos
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $Id_Producto)
+    public function update(Request $request, $Id)
     {
         //
         $datosProducto=request()->except(['_token','_method']);
-        if($request->hasFile('Imagen_Producto')){
-            $producto= Productos::findOrFail($Id_Producto);
-            Storage::delete('public/'.$producto->Imagen_Producto);
-            $datosProducto['Imagen_Producto']=$request->file('Imagen_Producto')->store('uploads','public');
+        if($request->hasFile('Imagen')){
+            $producto= Productos::findOrFail($Id);
+            Storage::delete('public/'.$producto->Imagen);
+            $datosProducto['Imagen']=$request->file('Imagen')->store('uploads','public');
         }
 
-        Productos::where('Id_Producto','=',$Id_Producto)->update($datosProducto);
+        Productos::where('Id','=',$Id)->update($datosProducto);
 
+        $producto= Productos::findOrFail($Id);
         //return view('productos.edit',compact('producto'));
-        return redirect('productos');
+        return redirect()->action('ProductosController@index');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Productos  $productos
+     * @param  \App\Productos  $productos
      * @return \Illuminate\Http\Response
      */
-    public function destroy($Id_Producto)
+    public function destroy($id)
     {
-        $producto=Productos::findOrFail($Id_Producto);
-        if(Storage::delete('public/'.$producto->Imagen_Producto))
+        //
+        $producto=Productos::findOrFail($id);
+        if(Storage::delete('public/'.$producto->Imagen))
         {
-            $producto->delete();
+            DB::table("productos")->delete($id);
         }
+
 
         return redirect('productos');
     }

@@ -11,14 +11,13 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+//Route::get('/', function () {
+//    return view('productos.index');
+//});
 
+Route::get('/','ProductosController@index');
+//Route::get('/usuarios/create','UsuariosController@create');
+Route::resource('usuarios', 'UsuariosController');
 Route::resource('productos', 'ProductosController');
 Route::resource('pedidos', 'PedidosController');
-Route::resource('detalles', 'DetallePedidosController');
-Route::resource('clientes', 'ClientesController');
-Route::resource('combos', 'CombosController');
-Route::resource('promociones', 'PromocionesController');
-Route::resource('compras','ComprasController');
+Route::resource('detalles', 'DetallesController');
